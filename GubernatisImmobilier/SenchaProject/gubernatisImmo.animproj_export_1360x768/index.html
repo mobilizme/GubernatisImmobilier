@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<!-- Sencha Animator Version: 1.5 Build: 219 -->
+<head>
+<meta charset="UTF-8">
+
+
+<title>gubernatisImmo &middot; Made with Sencha Animator</title>
+
+
+<script type="text/javascript">
+
+if(typeof(AN)==="undefined"){var AN={}}AN.instances={symbols:[],controllers:[]};AN.apiVersion=1;AN.Controller=function(){return{currentScene:false,userData:{},setConfig:function(a){AN.instances.controllers.push(this);this.events=a.events;this.prefix=a.cssPrefix;this.projectActions=a.projectActions;this.basePath=a.basePath?a.basePath:"";this.olElement=document.querySelector("#"+a.parentId+" ol");var d=this.olElement.children;this.useOrmma=a.ormma;this.scenes=[];this.scenesById={};this.sceneByName={};var g;for(var e=0;e<a.scenes.length;e++){g=a.scenes[e];g.element=d[e];g.timelinesById={};g.timelinesByName={};for(var c=0;c<g.timelines.length;c++){g.timelinesById[g.timelines[c].id]=g.timelines[c];g.timelinesByName[g.timelines[c].name]=g.timelines[c]}this.scenesById[g.id]=g;this.scenes.push(g);if(g.name){this.sceneByName[g.name]=g}}this.setupListeners();this.startSceneByName=this.goToSceneByName;this.startSceneById=this.goToSceneById;this.startSceneByID=this.startSceneById;this.symbolInstancesByHtmlId={};this.symbolInstancesById={};this.symbols=[];var h,b,f;for(var e=0;e<a.symbols.length;e++){h=a.symbols[e];this.symbolInstancesById[h.id]=[];b=this.olElement.querySelectorAll(".an-symbol-container-"+h.id);for(var c=0;c<b.length;c++){f=new AN.Symbol();f.setConfig(b[c],h,this);this.symbolInstancesByHtmlId[b[c].id]=f;this.symbolInstancesById[h.id].push(f);this.symbols.push(f)}}this.fireAction(this.projectActions,"init");this.goToScene(this.scenes[0])},setupListeners:function(){var l=this;this.browser="unknown";if(document.body.style.MozAnimationName!==undefined){this.browser="moz"}function h(j){var i;if(l.browser==="moz"){i=j.target;while(i=i.parentNode){if(i===l.currentScene.element){l.onAnimationEnd();return}}}else{l.onAnimationEnd()}}this.olElement.addEventListener("webkitAnimationEnd",h,false);this.olElement.addEventListener("animationend",h,false);function c(i){i.element.addEventListener("mousemove",function(j){i.mousemoveAction.call(l.userData,l,j)},false)}var g;for(var e=0;e<this.scenes.length;e++){g=this.scenes[e];if(g.mousemoveAction){c(g)}}function a(m,j,i){m.addEventListener(j,function(n){i.call(l.userData,l,n)},false)}var f,b,k;for(var e=0;e<this.events.length;e++){b=this.events[e];k=b.type;f=document.getElementById(b.id);for(var d=0;d<k.length;d++){a(f,k[d],b.handler)}}},onAnimationEnd:function(){this.runningAnimationCount--;if(this.runningAnimationCount===0){this.onAllAnimationEnd()}},onAllAnimationEnd:function(){var a=this.currentScene.currentTimeline.endWaitTime;if(a){var b=this;this.sceneTimeout=setTimeout(function(){b.onSceneFinish()},a*1000)}else{this.onSceneFinish()}},forceRefresh:function(a){this.forceRefreshValue=a.element.offsetHeight},fireAction:function(b,a){if(b&&b[a]){b[a].call(this.userData,this)}},getSymbolByHtmlId:function(a){return this.symbolInstancesByHtmlId[a]},getSymbolByInstanceId:function(b){var a=this.olElement.querySelector(".an-symbol-container.an-symbol-"+b);return this.getSymbolByHtmlId(a.id)},getSymbols:function(){return this.symbols},getSymbolsBySymbolMasterId:function(a){return this.symbolInstancesById[a]},getUserData:function(){return this.userData},getTimelineByIndex:function(a){return this.currentScene.timelines[a]},getTimelineById:function(a){return this.currentScene.timelinesById[a]},getTimelineByName:function(a){return this.currentScene.timelinesByName[a]},getCurrentTimeline:function(){return this.currentScene.currentTimeline},getCurrentScene:function(){return this.currentScene},getSceneByIndex:function(a){return this.scenes[a]},getSceneById:function(a){return this.scenesById[a]},getSceneByName:function(a){return this.sceneByName[a]},goToNextTimeline:function(){var b=this.currentScene.timelines.indexOf(this.currentScene.currentTimeline);var a=Math.min(b+1,this.currentScene.timelines.length-1);if(a===b){return}this.goToTimelineByIndex(a)},goToPreviousTimeline:function(){var b=this.currentScene.timelines.indexOf(this.currentScene.currentTimeline);var a=Math.max(b-1,0);if(b===a){return}this.goToTimelineByIndex(a)},goToTimelineById:function(a){this.goToScene(this.currentScene,this.currentScene.timelinesById[a])},goToTimelineByName:function(a){this.goToScene(this.currentScene,this.currentScene.timelinesByName[a])},goToTimelineByIndex:function(a){this.goToScene(this.currentScene,this.currentScene.timelines[a])},goToTimeline:function(a){this.goToScene(this.currentScene,a)},goToNextScene:function(){var b=this.scenes.indexOf(this.currentScene);var a=Math.min(b+1,this.scenes.length-1);if(b===a){return}this.goToSceneByIndex(a)},goToPreviousScene:function(){var a=this.scenes.indexOf(this.currentScene);var b=Math.max(a-1,0);if(a===b){return}this.goToSceneByIndex(b)},goToSceneByIndex:function(a){this.goToScene(this.scenes[a])},goToSceneByName:function(a){this.goToScene(this.sceneByName[a])},goToSceneById:function(a,b){var c=this.scenesById[a];this.goToScene(c,c.timelinesById[b])},goToScene:function(g,f){var d=g;var e=this.currentScene;var a=f;var c=e?e.currentTimeline:false;if(a===undefined){a=d.timelines[0]}var b=false;if(c===a&&e===d){b=true}else{if(e){e.element.setAttribute("class","")}}this.fireAction(c,"exitAction");clearTimeout(this.sceneTimeout);if(e!==d){this.fireAction(e,"exitAction");this.fireAction(d,"initAction")}this.fireAction(a,"initAction");this.runningAnimationCount=a.animationCount;this.currentScene=d;d.currentTimeline=a;var h="t-"+a.id;if(b||this.browser==="moz"){d.element.setAttribute("class","run restart "+h);this.forceRefresh(d)}d.element.setAttribute("class","run "+h);if(!b&&this.useOrmma){this.ormmaNextScene(d)}this.fireAction(a,"startAction");if(a.animationCount===0){this.onAllAnimationEnd()}},replayScene:function(){console.warn("replayScene is deprecated. Use restartScene instead.");this.restartScene()},restartScene:function(){this.goToScene(this.currentScene)},restartTimeline:function(){this.goToScene(this.currentScene,this.currentScene.currentTimeline)},onSceneFinish:function(){this.fireAction(this.currentScene.currentTimeline,"endAction")},goToURL:function(a){document.location.href=a},getElementById:function(a){return document.getElementById(this.getElementIdById(a))},getElementIdById:function(a){return this.prefix+a},getUrlForLocalAsset:function(b){var a="assets/"+b;if(this.basePath){a=this.basePath+"/"+a}return a},ormmaNextScene:function(c){var a=ormma.getState();if(c.dimensions.expanded){var i=ormma.getMaxSize();if(a!=="expanded"){ormma.expand({x:0,y:0,width:i.width,height:i.height})}var b="";var d=c.element.offsetHeight;var g=c.element.offsetWidth;var e=(i.height-d)/2;var h=(i.width-g)/2;b+=" translate3d("+Math.round(h)+"px,"+Math.round(e)+"px,0)";if(c.dimensions.fit){var f=Math.min(i.width/g,i.height/d);b+=" scale3d("+f+","+f+",1)"}c.element.style.webkitTransform=b}else{if(a==="expanded"){ormma.close()}ormma.resize(c.dimensions.width,c.dimensions.height)}}}};window.addEventListener('load',function(){var configData={parentId:'pCC0c8ypT-an-anim',cssPrefix:'pCC0c8ypT-',ormma:false,mraid:false,layout:{"type":"absolute","width":1360,"height":768},scenes:[{id:0,name:'DISPLAY',dimensions:{height:100,width:100,expanded:false,fit:false},timelines:[{id:"0",name:'Timeline 1',animationCount:4,duration:0.768,lastKeyframeTime:1.133}]}],symbols:[],projectActions:{},events:[],externalResources:[]};setTimeout(function(){var controller=new AN.Controller;controller.setConfig(configData);},0);},false);
+</script>
+
+
+<style type="text/css">
+
+#pCC0c8ypT-an-anim > ol{list-style:none;margin:0;padding:0;}#pCC0c8ypT-an-anim > ol > li{margin:0;padding:0;display:none;}#pCC0c8ypT-an-anim > ol > li.run{display:block;}#pCC0c8ypT-an-anim .pCC0c8ypT-an-stage{overflow:hidden;margin:0;padding:0;}#pCC0c8ypT-an-anim .pCC0c8ypT-an-stage div{position:absolute;}.pCC0c8ypT-an-stage *{margin:0;padding:0;font-smoothing:antialiased;-webkit-font-smoothing:antialiased;}#pCC0c8ypT-an-anim .pCC0c8ypT-an-stage img{position:absolute;top:0;left:0;}#pCC0c8ypT-an-anim .AN-Scene-Description{display:none;}#pCC0c8ypT-an-anim iframe{border:none;height:100%;width:100%}#pCC0c8ypT-an-anim .pCC0c8ypT-an-stage{position:absolute;top:0;left:0;width:100%;height:100%;}#pCC0c8ypT-an-anim{height:768px;width:1360px;position:relative;}#pCC0c8ypT-an-anim{background-color:rgba(255,255,255,1);font-family:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;font-size:12px;line-height:1.3;}#pCC0c8ypT-photo{transform:translate3d(234px, 275px, 0px) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(234px, 275px, 0px) scale3d(1.52, 1.52, 1);width:890px;height:325px;top:0;left:0;background-color:rgba(255,255,255,1);}.t-0 #pCC0c8ypT-photo{transform:translate3d(234px, 275px, 0px) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(234px, 275px, 0px) scale3d(1.52, 1.52, 1);}#pCC0c8ypT-logo{transform:translate3d(288px, 46px, 0px) scale3d(1.9, 1.9, 1);-webkit-transform:translate3d(288px, 46px, 0px) scale3d(1.9, 1.9, 1);width:640px;height:100px;top:0;left:0;}#pCC0c8ypT-type{transform:translate3d(-10px, 194px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(-10px, 194px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);width:160px;height:31px;top:0;left:0;background-color:rgba(103,104,106,0.62);color:rgba(255,255,255,1);font-size:22px;}@-webkit-keyframes ani-pCC0c8ypT-type-0{0%{-webkit-transform:translate3d(-202px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:ease;}100%{-webkit-transform:translate3d(44px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:cubic-bezier(1,0,1, 0);}}@keyframes ani-pCC0c8ypT-type-0{0%{transform:translate3d(-202px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease;}100%{transform:translate3d(44px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:cubic-bezier(1,0,1, 0);}}.run.t-0 #pCC0c8ypT-type{animation-name:ani-pCC0c8ypT-type-0;-webkit-animation-name:ani-pCC0c8ypT-type-0;animation-duration:0.5727s;-webkit-animation-duration:0.5727s;animation-delay:0.2s;-webkit-animation-delay:0.2s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #pCC0c8ypT-type{transform:translate3d(44px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(44px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:cubic-bezier(1,0,1, 0);-webkit-animation-timing-function:cubic-bezier(1,0,1, 0);}.restart.t-0 #pCC0c8ypT-type{transform:translate3d(-202px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(-202px, 198px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease;-webkit-animation-timing-function:ease;}.restart #pCC0c8ypT-type{animation-name:none !important;-webkit-animation-name:none !important;}#pCC0c8ypT-price{transform:translate3d(-70px, 188px, 0px) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(-70px, 188px, 0px) scale3d(1.52, 1.52, 1);width:145px;height:31px;top:0;left:0;background-color:rgba(103,104,106,0.6201923076923077);color:rgba(255,255,255,1);font-size:22px;font-family:"Lucida Grande", Lucida, Verdana, sans-serif;text-align:center;transform-style:flat;-webkit-transform-style:flat;}@-webkit-keyframes ani-pCC0c8ypT-price-0{0%{-webkit-transform:translate3d(-181px, 198px, 0px) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:linear;-webkit-transform-origin:50% 50%;}28.3019%{-webkit-transform:translate3d(257px, 200px, 0px) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:linear;-webkit-transform-origin:50% 50%;}100%{-webkit-transform:translate3d(1178px, 198px, 0px) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:linear;-webkit-transform-origin:50% 50%;}}@keyframes ani-pCC0c8ypT-price-0{0%{transform:translate3d(-181px, 198px, 0px) scale3d(1.52, 1.52, 1);animation-timing-function:linear;transform-origin:50% 50%;}28.3019%{transform:translate3d(257px, 200px, 0px) scale3d(1.52, 1.52, 1);animation-timing-function:linear;transform-origin:50% 50%;}100%{transform:translate3d(1178px, 198px, 0px) scale3d(1.52, 1.52, 1);animation-timing-function:linear;transform-origin:50% 50%;}}.run.t-0 #pCC0c8ypT-price{animation-name:ani-pCC0c8ypT-price-0;-webkit-animation-name:ani-pCC0c8ypT-price-0;animation-duration:0.7067s;-webkit-animation-duration:0.7067s;animation-delay:0s;-webkit-animation-delay:0s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #pCC0c8ypT-price{transform:translate3d(1178px, 198px, 0px) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(1178px, 198px, 0px) scale3d(1.52, 1.52, 1);animation-timing-function:linear;-webkit-animation-timing-function:linear;transform-origin:50% 50%;-webkit-transform-origin:50% 50%;}.restart.t-0 #pCC0c8ypT-price{transform:translate3d(-181px, 198px, 0px) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(-181px, 198px, 0px) scale3d(1.52, 1.52, 1);animation-timing-function:linear;-webkit-animation-timing-function:linear;transform-origin:50% 50%;-webkit-transform-origin:50% 50%;}.restart #pCC0c8ypT-price{animation-name:none !important;-webkit-animation-name:none !important;}#pCC0c8ypT-title{transform:translate3d(111px, 289px, 0px) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(111px, 289px, 0px) scale3d(1.52, 1.52, 1);width:600px;height:29px;top:0;left:0;background-color:rgba(213,2,21,0.6634615384615384);color:rgba(255,255,255,1);font-size:22px;}@-webkit-keyframes ani-pCC0c8ypT-title-0{0%{-webkit-transform:translate3d(-758px, 648px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:ease-in-out;}66.4474%{-webkit-transform:translate3d(261px, 645px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:ease-in-out;}100%{-webkit-transform:translate3d(159px, 647px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-animation-timing-function:ease-in-out;}}@keyframes ani-pCC0c8ypT-title-0{0%{transform:translate3d(-758px, 648px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease-in-out;}66.4474%{transform:translate3d(261px, 645px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease-in-out;}100%{transform:translate3d(159px, 647px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease-in-out;}}.run.t-0 #pCC0c8ypT-title{animation-name:ani-pCC0c8ypT-title-0;-webkit-animation-name:ani-pCC0c8ypT-title-0;animation-duration:0.7677s;-webkit-animation-duration:0.7677s;animation-delay:0s;-webkit-animation-delay:0s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #pCC0c8ypT-title{transform:translate3d(159px, 647px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(159px, 647px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease-in-out;-webkit-animation-timing-function:ease-in-out;}.restart.t-0 #pCC0c8ypT-title{transform:translate3d(-758px, 648px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);-webkit-transform:translate3d(-758px, 648px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale3d(1.52, 1.52, 1);animation-timing-function:ease-in-out;-webkit-animation-timing-function:ease-in-out;}.restart #pCC0c8ypT-title{animation-name:none !important;-webkit-animation-name:none !important;}#pCC0c8ypT-qrcode{transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0.5, 0.5, 1);-webkit-transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0.5, 0.5, 1);width:385px;height:385px;top:0;left:0;transform-origin:20% 48%;-webkit-transform-origin:20% 48%;}@-webkit-keyframes ani-pCC0c8ypT-qrcode-0{0%{-webkit-transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0, 0, 1);}100%{-webkit-transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0.5, 0.5, 1);}}@keyframes ani-pCC0c8ypT-qrcode-0{0%{transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0, 0, 1);}100%{transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0.5, 0.5, 1);}}.run.t-0 #pCC0c8ypT-qrcode{animation-name:ani-pCC0c8ypT-qrcode-0;-webkit-animation-name:ani-pCC0c8ypT-qrcode-0;animation-duration:0.7677s;-webkit-animation-duration:0.7677s;animation-delay:0s;-webkit-animation-delay:0s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #pCC0c8ypT-qrcode{transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0.5, 0.5, 1);-webkit-transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0.5, 0.5, 1);}.restart.t-0 #pCC0c8ypT-qrcode{transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0, 0, 1);-webkit-transform:translate3d(1244px, 407px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale3d(0, 0, 1);}.restart #pCC0c8ypT-qrcode{animation-name:none !important;-webkit-animation-name:none !important;}#pCC0c8ypT-logo-mobiliz{transform:translate3d(1118px, 0px, 0px) scale3d(1, 1, 1);-webkit-transform:translate3d(1118px, 0px, 0px) scale3d(1, 1, 1);width:241px;height:193px;top:0;left:0;transform-origin:54% 44%;-webkit-transform-origin:54% 44%;}
+</style>
+
+
+
+</head>
+<body style="margin:0; height: 100%;">
+<div id="pCC0c8ypT-an-anim"><ol>
+
+<li id="pCC0c8ypT-an-scene-0" >
+<div class="pCC0c8ypT-an-stage">
+<div id="pCC0c8ypT-photo"><div><img  height="325" width="890"  src=""></div></div>
+<div id="pCC0c8ypT-logo"><div><img  height="100" width="640"  src="./SenchaProject/gubernatisImmo.animproj_export/assets/header.jpg"></div></div>
+<div id="pCC0c8ypT-type"><span></span></div>
+<div id="pCC0c8ypT-price"><span></span></div>
+<div id="pCC0c8ypT-title"><span></span></div>
+<div id="pCC0c8ypT-qrcode"><div><img  height="385" width="385"  src=""></div></div>
+<div id="pCC0c8ypT-logo-mobiliz"><div><img  height="193" width="241"  src="./SenchaProject/gubernatisImmo.animproj_export/assets/logo-mobiliz.png"></div></div>
+</div>
+</li>
+
+</ol></div>
+
+</body>
+</html>
+
+
+<!--
+/**************************************************************************************/
+/*************************************** ADDED ****************************************/
+/**************************************************************************************/
+-->
+
+<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+	<script>
+	
+	$(document).ready(function(){
+	  get_list();
+	});
+
+	function get_list(){
+		$json_url = "http://gubernatis-immobilier.com/modules/xml/display.php";
+		  $.ajax({
+			url: $json_url,
+			dataType: "xml",
+			complete : function(data) {
+			  var list = data.responseXML;		
+					
+				var xmlData = new Array();	
+				var i = 0;
+				$(list).find('entry').each(function(){
+					xmlData[i] = new Array();
+					xmlData[i]["id"] = $(this).find('id').text();
+					xmlData[i]["title_french"] = $(this).find('title_french').text();
+					xmlData[i]["link"] = $(this).find('link').text();
+					xmlData[i]["type"] = $(this).find('type').text();
+					xmlData[i]["price"] = $(this).find('price').text();
+					xmlData[i]["photo"] = $(this).find('photo').text();
+					xmlData[i]["qrcode"] = $(this).find('qrcode').text();
+					i++;
+				});			
+					var lenght = i;
+					var i = 0;
+					display(xmlData[i]);
+					i++;
+					setInterval(function(){
+						setTimeout(display, 0, xmlData[i]);
+						if(i >= lenght){
+							i = 0;
+						}else{
+							i++;
+						}
+					}, 3000);		
+			},
+			error : function(data) {
+				$('<div class="alert alert-danger"><button class="close" data-dismiss="alert" type="button">&times;</button>Erreur pendant le chargement de la liste des proriétés.</div>').appendTo("body");
+			}
+		  });
+	 }
+	 
+	 function display(xmlData){
+		if(xmlData != null && xmlData != "undefined"){
+			$("#pCC0c8ypT-type").html("<span> "+xmlData["type"]+"</span>");	
+			$("#pCC0c8ypT-title").html("<span> "+xmlData["title_french"]+"</span>");
+			$("#pCC0c8ypT-price").html("<span>"+addSeparators(xmlData["price"])+"€</span>");
+			$("#pCC0c8ypT-photo img").attr('src', xmlData["photo"]);
+			$("#pCC0c8ypT-qrcode img").attr('src', xmlData["qrcode"]);
+			AN.instances.controllers[0].goToSceneByName("DISPLAY");
+		}
+	 }
+	 
+	function addSeparators(n){
+		var rx=  /(\d+)(\d{3})/;
+		return String(n).replace(/^\d+/, function(w){
+			while(rx.test(w)){
+				w= w.replace(rx, '$1.$2');
+			}
+			return w;
+		});
+	}
+
+	</script>
+<!--
+/**************************************************************************************/
+/************************************** END ADDED *************************************/
+/**************************************************************************************/
+-->
